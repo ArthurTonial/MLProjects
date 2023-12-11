@@ -10,8 +10,8 @@ import seaborn as sns
 
 
 # Função para avaliação dos modelos
-def evaluate_model(model, X, y, metric='accuracy'):
-    kfold = KFold(n_splits=5, shuffle=True, random_state=42)
+def evaluate_model(model, X, y, folds, metric='accuracy'):
+    kfold = KFold(n_splits=folds, shuffle=True, random_state=42)
     scores = cross_val_score(model, X, y, cv=kfold, scoring=metric)
     return scores
 
@@ -54,9 +54,10 @@ gb_model = GradientBoostingClassifier()
 svm_model = SVC()
 
 # Avaliando os modelos
-rf_scores = evaluate_model(rf_model, X, y)
-gb_scores = evaluate_model(gb_model, X, y)
-svm_scores = evaluate_model(svm_model, X, y)
+folds = 5
+rf_scores = evaluate_model(rf_model, X, y, folds)
+gb_scores = evaluate_model(gb_model, X, y, folds)
+svm_scores = evaluate_model(svm_model, X, y, folds)
 
 # Exibindo resultados
 print(f"Random Forest Scores: {rf_scores.mean():.4f}")
