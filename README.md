@@ -19,3 +19,6 @@
 - Corretude da implementação: se o código executado atinge os resultados reportados e a facilidade de especificar a execução de um algoritmo com um k customizado na validação cruzada;
 - Tempo de resposta: não iremos avaliar o tempo de uma eventual otimização de hiperparâmetros, pois ela envolve muitas execuções. Mas haverá penalização caso a execução de 1 fold de uma parametrização específica demore mais que 5 minutos;
 - Qualidade do relatório final, em termos da estrutura, da escrita e da discussão dos itens pedidos no enunciado.
+
+## Docs Compartilhado
+- https://docs.google.com/document/d/1DWnIqTdaeG3_83vTlqXpOOiUtfJG5dtpKsW44MvDQtA/edit?usp=sharing
