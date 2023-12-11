@@ -21,4 +21,5 @@
 - Qualidade do relatório final, em termos da estrutura, da escrita e da discussão dos itens pedidos no enunciado.
 
 ## Docs Compartilhado
-- https://docs.google.com/document/d/1DWnIqTdaeG3_83vTlqXpOOiUtfJG5dtpKsW44MvDQtA/edit?usp=sharing
+- Definição do Trabalho: https://docs.google.com/document/d/1DWnIqTdaeG3_83vTlqXpOOiUtfJG5dtpKsW44MvDQtA/edit?usp=sharing
+- Relatório do Trabalho: https://docs.google.com/document/d/1rkd_vrPGvmjBAJd-OUAvBkVk51E3BgtI_TKVMb4X4m4/edit?usp=sharing
