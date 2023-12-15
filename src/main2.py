@@ -4,7 +4,7 @@ import pandas as pd
 import seaborn as sns
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
-from sklearn.model_selection import GridSearchCV, cross_val_score, cross_val_predict
+from sklearn.model_selection import GridSearchCV, cross_val_score, cross_val_predict, RandomizedSearchCV
 from sklearn.model_selection import KFold
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
@@ -39,7 +39,7 @@ def evaluate_model(model, X, y, folds=5):
     cm = confusion_matrix(y, y_pred)
 
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
-    plt.title('Confusion Matrix')
+    plt.title(f'Confusion Matrix - {folds} folds')
     plt.xlabel('Predicted')
     plt.ylabel('True')
     plt.show()
@@ -71,7 +71,6 @@ for k in k_values:
 print("\n\n")
 print("# ========================== DECISION TREE ===============================", end='')
 
-# Definindo os hiperparâmetros a serem testados para a Decision Tree
 param_grid_dt = {
     'criterion': ['gini', 'entropy'],
     'splitter': ['best', 'random'],
@@ -95,7 +94,7 @@ for k in k_values:
 print("\n\n")
 print("# ========================== RANDOM FOREST ===============================", end='')
 
-param_grid_rf = {
+param_dist_rf = {
     'n_estimators': [50, 100, 150],
     'criterion': ['gini', 'entropy'],
     'max_depth': [None, 10, 20, 30],
@@ -104,13 +103,12 @@ param_grid_rf = {
     'bootstrap': [True, False]
 }
 rf_model = RandomForestClassifier()
-grid_search_rf = GridSearchCV(rf_model, param_grid_rf, cv=5, scoring='accuracy')
-grid_search_rf.fit(X, y)
-
-best_params_rf = grid_search_rf.best_params_
+random_search_rf = RandomizedSearchCV(rf_model, param_distributions=param_dist_rf, n_iter=10, cv=5, scoring='accuracy', random_state=42)
+random_search_rf.fit(X, y)
+best_params_rf = random_search_rf.best_params_
 
 rf_model = RandomForestClassifier(**best_params_rf)
 
-for folds in range(2, 3):
-    print(f"\nRandom Forest Scores with folds = {folds}:")
-    evaluate_model(rf_model, X, y, folds=folds)
+for k in k_values:
+    print(f"\nRandom Forest Scores with folds = {k}:")
+    evaluate_model(rf_model, X, y, folds=k)
