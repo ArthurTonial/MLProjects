@@ -2,13 +2,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import GridSearchCV, cross_val_score, cross_val_predict, RandomizedSearchCV
 from sklearn.model_selection import KFold
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
-from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
 
@@ -80,8 +79,8 @@ param_grid_dt = {
 }
 dt_model = DecisionTreeClassifier()
 grid_search_dt = GridSearchCV(dt_model, param_grid_dt, cv=5, scoring='accuracy')
-grid_search_dt.fit(X, y)
 
+grid_search_dt.fit(X, y)
 best_params_dt = grid_search_dt.best_params_
 
 dt_model = DecisionTreeClassifier(**best_params_dt)
@@ -102,8 +101,10 @@ param_dist_rf = {
     'min_samples_leaf': [1, 2, 4],
     'bootstrap': [True, False]
 }
+
 rf_model = RandomForestClassifier()
 random_search_rf = RandomizedSearchCV(rf_model, param_distributions=param_dist_rf, n_iter=10, cv=5, scoring='accuracy', random_state=42)
+
 random_search_rf.fit(X, y)
 best_params_rf = random_search_rf.best_params_
 
